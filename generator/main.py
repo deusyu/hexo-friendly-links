@@ -85,19 +85,29 @@ def get_issues_list(repo, labels=[], state='all', sort='created'):
 def generate_json_based_on_issues():
     output_dict = {}
     cfg_issues = cfg['issues']
-    cfg_issues['state'] = 'all' if not cfg_issues['state'] else cfg_issues['state']
     labels_list = get_labels_for_repo(cfg_issues["repo"])
     issues_list = get_issues_list(
-        repo=cfg_issues["repo"], state=cfg_issues["state"], sort=cfg_issues["sort"])
-    # 生成 all
+        repo=cfg_issues["repo"], state='all', sort=cfg_issues["sort"])
+    # 生成 all, 包含所有的issues, 不区分state和labels
     output_dict['all'] = issues_list
+    # 根据state过滤issues
     # 生成 groups
-    for label in labels_list:
-        # 如果没有配置labels, 则生成所有的labels;
-        # 如果配置了labels, 则生成配置的labels
-        if not cfg_issues['labels'] or (len(cfg_issues['labels']) and label['name'] in cfg_issues['labels']):
-            output_dict[label['name']] = list(
-                filter(lambda x: label in x['raw']['labels'], issues_list))
+    if not cfg_issues['groups']:
+        return output_dict
+    for group in cfg_issues['groups']:
+        # 状态过滤
+        issues_list_with_state = issues_list
+        if group['state'] and group['state'] != 'all':
+            issues_list_with_state = list(
+                filter(lambda x: x['raw']['state'] == group['state'], issues_list))
+        # 根据labels过滤
+        issues_list_with_state_and_labels = issues_list_with_state
+        if group['labels'] and len(group['labels']):
+            issues_list_with_state_and_labels = list(
+                filter(lambda item: set(group['labels']).issubset(set([x['name'] for x in item['raw']['labels']])), issues_list_with_state))
+
+        # 生成json
+        output_dict[group['name']] = issues_list_with_state_and_labels
 
     # remove raw data
     if not cfg_issues['keep_raw']:
