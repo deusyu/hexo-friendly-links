@@ -1,4 +1,4 @@
-# Issues-Json Generator
+# hexo-friendly-links
 
 自动提取本仓库 issues 中第一段 `JSON` 代码块并保存到仓库中.
 
