@@ -7,6 +7,6 @@ request:
 issues:
   repo: Doradx/hexo-friendly-links # 仓库持有者/仓库名
   state: all # 需要导出的issues状态, open/closed/all
-  labels: ['active', 'checklist'] # 需要单独生成文件的label, 可视为分组
+  labels: ['active', 'checklist','404'] # 需要单独生成文件的label, 可视为分组
   sort: updated-desc # 排序，按最近更新，取消此项则按创建时间排序
   keep_raw: false # 是否需要原始issuses数据字段 (包含大量github用户信息)
