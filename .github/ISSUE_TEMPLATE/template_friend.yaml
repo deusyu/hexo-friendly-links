@@ -28,10 +28,10 @@ body:
       value: |
         ```json
         {
-          "name": "Site Name",
-          "link": "https://blog.xxxx.com",
+          "title": "Site Name",
+          "url": "https://blog.xxxx.com",
           "avatar": "https://blog.xxxx.com/logo.png",
-          "descr": "Site description"
+          "description": "Site description"
         }
         ```
   - type: input
