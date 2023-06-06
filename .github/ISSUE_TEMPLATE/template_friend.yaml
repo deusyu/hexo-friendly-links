@@ -41,7 +41,7 @@ body:
       description: 请输入您的友链页面地址。
       placeholder: "如: https://yoursite.com/friends/"
     validations:
-      required: true
+      required: false
   - type: input
     id: friends-repo
     attributes:
