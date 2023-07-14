@@ -44,8 +44,8 @@ body:
     validations:
       required: false
   - type: input
-    id: friends-repo
+    id: rss-url
     attributes:
-      label: 友链仓库（可选）
-      description: 如果您使用 issue 作为友链源，请附上 issue 仓库链接。
-      placeholder: "如: https://github.com/yourname/friends/"
+      label: RSS订阅地址
+      description: 如果您使用有RSS订阅链接，请在此处填写，方便抓取最新文章
+      placeholder: "如: https://blog.cuger.cn/atom.xml"
