@@ -59,10 +59,10 @@ issues:
 信息如下：
 ```json
 {
-    "title": "Dorad",
-    "url": "https://blog.cuger.cn",
-    "avatar": "https://blog.cuger.cn/images/avatar.png",
-    "screenshot": "无",
-    "description": "地质、炼丹、编程、GIS、摄影"
+    "title": "Dorad",
+    "url": "https://blog.cuger.cn",
+    "avatar": "https://blog.cuger.cn/images/avatar.png",
+    "screenshot": "无",
+    "description": "莫回头、勿相忘"
 }
 ```
