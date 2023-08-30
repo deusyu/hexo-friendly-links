@@ -5,6 +5,10 @@ on:
   watch:
     types: [started]
 
+concurrency:
+  group: generator-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
