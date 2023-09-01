@@ -74,22 +74,27 @@ def get_issues_list(repo, labels=[], state='all', sort='created'):
                     'url-feed': '订阅地址'
                 }
                 # 采用 ### 将数据分为多个部分, 每个部分的第一行为title, 第二行为value
-                items = item['body'].split('###')
-                item_dict = {}
-                item_dict_new = {}
-                for item in items:
-                    if len(item.split('\n\n')) < 2:
+                rows = item['body'].split('###')
+                rows_dict = {}
+                rows_dict_new = {}
+                for row in rows:
+                    if len(row.split('\n\n')) < 2:
                         continue
-                    key, value = item.split('\n\n')[0], item.split('\n\n')[1]
-                    item_dict[key.strip()] = value.strip()
+                    key, value = row.split('\n\n')[0], row.split('\n\n')[1]
+                    rows_dict[key.strip()] = value.strip()
                 # 替换 dict 的 key
                 for k,v in item_keys.items():
-                    item_dict_new[k] = item_dict.pop(
-                        v).strip() if v in item_dict else ''
-                    item_dict_new[k] = '' if item_dict_new[k] == '_No response_' else item_dict_new[k]
-                return item_dict_new
+                    rows_dict_new[k] = rows_dict.pop(
+                        v).strip() if v in rows_dict else ''
+                    rows_dict_new[k] = '' if rows_dict_new[k] == '_No response_' else rows_dict_new[k]
+                return dict(
+                    rows_dict_new,
+                    **{
+                        'raw': item
+                    }
+                )
             
-            if not len(re.findall(r'```json([\s\S]+)```', item['body'])):
+            if len(re.findall(r'```json([\s\S]+)```', item['body'])):
                 issues_list.append(parser_json(item))
             else:
                 issues_list.append(parser_table(item))
