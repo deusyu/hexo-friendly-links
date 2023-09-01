@@ -31,8 +31,7 @@ body:
           "title": "Site Name",
           "url": "https://blog.xxxx.com",
           "avatar": "https://blog.xxxx.com/logo.png",
-          "description": "Site description",
-          "screenshot": "https::/blog.xxx.com/screenshot.png"
+          "description": "Site description"
         }
         ```
   - type: input
