@@ -74,10 +74,13 @@ def get_issues_list(repo, labels=[], state='all', sort='created'):
                     'url-feed': '订阅地址'
                 }
                 # 采用 ### 将数据分为多个部分, 每个部分的第一行为title, 第二行为value
-                rows = item['body'].split('###')
+                rows = item['body'].strip().split('###')
                 rows_dict = {}
                 rows_dict_new = {}
                 for row in rows:
+                    if not row.strip():
+                        continue
+                    row=row.replace('\r\n', '\n')
                     if len(row.split('\n\n')) < 2:
                         continue
                     key, value = row.split('\n\n')[0], row.split('\n\n')[1]
