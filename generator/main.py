@@ -68,7 +68,7 @@ def get_issues_list(repo, labels=[], state='all', sort='created'):
                 item_keys = {
                     'title': '博客名称',
                     'url': '博客地址',
-                    'avatar': '网站图标',
+                    'avatar': '博客图标',
                     'description': '博客描述',
                     'url-friends': '友链地址',
                     'url-feed': '订阅地址'

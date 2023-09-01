@@ -29,7 +29,7 @@ body:
   - type: input
     id: link-url
     attributes:
-      label: 主页地址
+      label: 博客地址
       description: 请输入您博客的主页地址，包含https。
       placeholder: "如: https://blog.cuger.cn"
     validations:
