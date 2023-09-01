@@ -43,7 +43,7 @@ issues:
 
 
 ## 申请友链
-前往GitHub提交[issues](https://github.com/Doradx/hexo-friendly-links/issues)即可, [直达链接](https://github.com/Doradx/hexo-friendly-links/issues/new?assignees=&labels=&template=template_friend.yaml)
+前往GitHub提交[issues](https://github.com/Doradx/hexo-friendly-links/issues)即可, [直达链接](https://github.com/Doradx/hexo-friendly-links/issues/new?assignees=&labels=&template=template_friend_new.yaml)
 需要准备的内容:
 ```json
 {
