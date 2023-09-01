@@ -53,30 +53,46 @@ def get_issues_list(repo, labels=[], state='all', sort='created'):
         resp_list = response.json()
         issues_list = []
         for item in resp_list:
-            # 解析body中需要的字段: 
-            item_keys = {
-                'title': '博客名称',
-                'url': '博客地址',
-                'avatar': '网站图标',
-                'description': '博客描述',
-                'url-friends': '友链地址',
-                'url-feed': '订阅地址'
-            }
-            # 采用 ### 将数据分为多个部分, 每个部分的第一行为title, 第二行为value
-            items = item['body'].split('###')
-            item_dict = {}
-            item_dict_new = {}
-            for item in items:
-                if len(item.split('\n\n')) < 2:
-                    continue
-                key, value = item.split('\n\n')[0], item.split('\n\n')[1]
-                item_dict[key.strip()] = value.strip()
-            # 替换 dict 的 key
-            for k,v in item_keys.items():
-                item_dict_new[k] = item_dict.pop(
-                    v).strip() if v in item_dict else ''
-                item_dict_new[k] = '' if item_dict_new[k] == '_No response_' else item_dict_new[k]
-            issues_list.append(item_dict_new)
+            def parser_json(item):
+                # parser the body
+                body_re = re.findall(r'```json([\s\S]+)```', item['body'])
+                return dict(
+                    json.loads(body_re[0]),
+                    **{
+                        'raw': item
+                    }
+                )
+
+            def parser_table(item):
+                # 解析body中需要的字段: 
+                item_keys = {
+                    'title': '博客名称',
+                    'url': '博客地址',
+                    'avatar': '网站图标',
+                    'description': '博客描述',
+                    'url-friends': '友链地址',
+                    'url-feed': '订阅地址'
+                }
+                # 采用 ### 将数据分为多个部分, 每个部分的第一行为title, 第二行为value
+                items = item['body'].split('###')
+                item_dict = {}
+                item_dict_new = {}
+                for item in items:
+                    if len(item.split('\n\n')) < 2:
+                        continue
+                    key, value = item.split('\n\n')[0], item.split('\n\n')[1]
+                    item_dict[key.strip()] = value.strip()
+                # 替换 dict 的 key
+                for k,v in item_keys.items():
+                    item_dict_new[k] = item_dict.pop(
+                        v).strip() if v in item_dict else ''
+                    item_dict_new[k] = '' if item_dict_new[k] == '_No response_' else item_dict_new[k]
+                return item_dict_new
+            
+            if not len(re.findall(r'```json([\s\S]+)```', item['body'])):
+                issues_list.append(parser_json(item))
+            else:
+                issues_list.append(parser_table(item))
         return issues_list
     total_issues_list = []
     try:
