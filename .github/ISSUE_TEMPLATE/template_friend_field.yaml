@@ -1,0 +1,68 @@
+name: 友链模板
+description: 自助添加友链。
+labels: []
+body:
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 检查清单
+      description: 请认真检查以下清单中的每一项，并在相符的项前打勾。
+      options:
+        - required: true
+          label: 合法的、非营利性、无商业广告、无木马植入。
+        - required: false
+          label: 有实质性原创内容的 HTTPS 站点，发布过至少 5 篇原创文章，内容题材不限。
+        - required: false
+          label: 有独立域名，非免费域名。
+        - required: false
+          label: 博客已运行至少半年，非刚搭建好。
+        - required: false
+          label: 与 **博主** 有至少 2 次有效互动（有内容的留言或者 issue 等）。
+  - type: input
+    id: link-name
+    attributes:
+      label: 博客名称
+      description: 请输入您的博客名称。
+      placeholder: "如: 遐说"
+    validations:
+      required: true
+  - type: input
+    id: link-url
+    attributes:
+      label: 主页地址
+      description: 请输入您博客的主页地址，包含https。
+      placeholder: "如: https://blog.cuger.cn"
+    validations:
+      required: true
+  - type: input
+    id: link-avatar
+    attributes:
+      label: 博客图标
+      description: 请输入您博客的图标地址，包含https，请检查是否能正常访问，且无跨域问题。
+      placeholder: "如: https://blog.cuger.cn/images/avatar.png"
+    validations:
+      required: true
+  - type: input
+    id: link-desc
+    attributes:
+      label: 博客描述
+      description: 请输入您博客的描述。
+      placeholder: "如: 爱编程，爱摄影，期待走遍万水千山！"
+    validations:
+      required: true
+  - type: input
+    id: friends-html
+    attributes:
+      label: 友链地址
+      description: 请输入您的友链页面地址。
+      placeholder: "如: https://yoursite.com/friends/"
+    validations:
+      required: false
+  - type: input
+    id: rss-url
+    attributes:
+      label: 订阅地址
+      description: 如果您使用有RSS订阅链接，请在此处填写，方便抓取最新文章
+      placeholder: "如: https://blog.cuger.cn/atom.xml"
+    validations:
+      required: false
