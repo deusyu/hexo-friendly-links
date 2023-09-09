@@ -1,5 +1,6 @@
 name: 友链模板-新
-description: 自助添加友链，星号必填；审核通过后会实时同步到博客！
+description: |
+  自助添加友链，星号必填；审核通过后会实时同步到博客！
 labels: []
 body:
   - type: checkboxes
@@ -11,11 +12,9 @@ body:
         - required: true
           label: 合法的、非营利性、无商业广告、无木马植入。
         - required: false
-          label: 有实质性原创内容的 HTTPS 站点，发布过至少 5 篇原创文章，内容题材不限。
+          label: 有实质性原创内容的 HTTPS 站点，发布过至少 5 篇原创文章，且至少稳定运行半年。
         - required: false
-          label: 有独立域名，非免费域名。
-        - required: false
-          label: 博客已运行至少半年，非刚搭建好。
+          label: 无违反国家相关法律法规和道德底线的内容，不涉反动言论。
         - required: false
           label: 与 **博主** 有至少 2 次有效互动（有内容的留言或者 issue 等）。
   - type: input
