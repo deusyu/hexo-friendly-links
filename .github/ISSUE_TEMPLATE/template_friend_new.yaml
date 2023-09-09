@@ -1,5 +1,5 @@
 name: 友链模板-新
-description: 自助添加友链，星号必填；校验通过后会同步到博客，约需6小时。
+description: 自助添加友链，星号必填；审核通过后会实时同步到博客！
 labels: []
 body:
   - type: checkboxes
