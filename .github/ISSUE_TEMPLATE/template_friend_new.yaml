@@ -1,8 +1,13 @@
 name: 友链模板-新
-description: |
-  自助添加友链，星号必填；审核通过后会实时同步到博客！
+description: 自助友链申请模板
 labels: []
+assignees:
+  - Doradx
 body:
+  - type: markdown
+    attributes:
+      value: |
+        自助添加友链，星号必填；审核通过后会实时同步到博客！
   - type: checkboxes
     id: checks
     attributes:
