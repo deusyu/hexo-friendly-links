@@ -6,6 +6,7 @@ import re
 
 import requests
 import yaml
+import feedparser
 
 version = 'v2.1'  # 版本号，已经存在json文件里面了
 output_dir = 'json'  # 输出目录不应该随着版本变化，应该固定.
@@ -126,6 +127,18 @@ def generate_json_based_on_issues():
     labels_list = get_labels_for_repo(cfg_issues["repo"])
     issues_list = get_issues_list(
         repo=cfg_issues["repo"], state='all', sort=cfg_issues["sort"])
+    for issue in issues_list:
+        # 检查每个友链是否健在?
+        if 'url' in issue and issue['url']:
+            try:
+                # test the url using requests head
+                requests.head(issue['url'], timeout=5)
+                issue['status'] = 'active'
+            except:
+                issue['status'] = '404'
+        # 获取每个友链是否有feed, 有的话, 获取feed内容
+        if 'url-feed' in issue and issue['url-feed']:
+            issue['rss'] = get_feed_content(issue['url-feed'])
     # 生成 all, 包含所有的issues, 不区分state和labels
     output_dict['all'] = issues_list
     # 根据state过滤issues
@@ -153,6 +166,25 @@ def generate_json_based_on_issues():
             del item['raw']
 
     return output_dict
+
+def get_feed_content(rss_url):
+    # get all feed content
+    try:
+        feed = feedparser.parse(rss_url)
+        # delete content in feed
+        items = []
+        for item in feed.entries:
+            items.append({
+                'title': item.title,
+                'link': item.link,
+                'published': item.published,
+                'published_parsed': item.published_parsed,
+                'author': item.author,
+                'summary': item.summary
+            })
+        return items
+    except:
+        return []
 
 
 output_dict = generate_json_based_on_issues()

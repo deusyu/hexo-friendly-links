@@ -8,11 +8,6 @@ issues:
       labels: ['active'] # 本组必须包含的标签列表, 多个标签为and关系
     },
     {
-      name: 'friendly_links_404',
-      state: all,
-      labels: ['404']
-    },
-    {
       name: 'friendly_links_open_checklist',
       state: open,
       labels: ['checklist']
