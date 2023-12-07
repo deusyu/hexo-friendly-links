@@ -1,7 +1,22 @@
-name: 友链模板-新
-description: 自助添加友链，星号必填；校验通过后会同步到博客，约需6小时。
+name: 友链模板
+description: 自助友链申请模板
 labels: []
+assignees:
+  - Doradx
 body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 填写说明
+        欢迎自助申请本站友链，**星号(*)为必填项**。审核通过后会实时同步到博客！
+        > 申请前请先添加本站友链，谢谢！
+         本站友链信息如下：
+        - 博客名称：遐说-Dorad
+        - 博客地址：https://blog.cuger.cn
+        - 博客图标：https://blog.cuger.cn/images/avatar.png
+        - 博客描述：❤编程❤摄影，期待走遍万水千山！
+        - 友链地址：https://blog.cuger.cn/link/
+        - 订阅地址：https://blog.cuger.cn/feed/
   - type: checkboxes
     id: checks
     attributes:
@@ -11,11 +26,9 @@ body:
         - required: true
           label: 合法的、非营利性、无商业广告、无木马植入。
         - required: false
-          label: 有实质性原创内容的 HTTPS 站点，发布过至少 5 篇原创文章，内容题材不限。
+          label: 有实质性原创内容的 HTTPS 站点，发布过至少 5 篇原创文章，且至少稳定运行半年。
         - required: false
-          label: 有独立域名，非免费域名。
-        - required: false
-          label: 博客已运行至少半年，非刚搭建好。
+          label: 无违反国家相关法律法规和道德底线的内容，不涉反动言论和政治敏感话题。
         - required: false
           label: 与 **博主** 有至少 2 次有效互动（有内容的留言或者 issue 等）。
   - type: input
