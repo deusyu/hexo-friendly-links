@@ -171,16 +171,17 @@ def get_feed_content(rss_url):
     # get all feed content
     try:
         feed = feedparser.parse(rss_url)
+        # print(feed)
         # delete content in feed
         items = []
         for item in feed.entries:
             items.append({
                 'title': item.title,
                 'link': item.link,
-                'published': item.published,
-                'published_parsed': item.published_parsed,
-                'author': item.author,
-                'summary': item.summary
+                'published': 'published' in item and item.published or None,
+                'published_parsed': 'published_parsed' in item and item.published_parsed or None,
+                'author': 'author' in item and item.author or None,
+                'summary': 'summary' in item and item.summary or None,
             })
         return items
     except:
