@@ -183,6 +183,8 @@ def get_feed_content(rss_url):
                 'author': 'author' in item and item.author or None,
                 'summary': 'summary' in item and item.summary or None,
             })
+        # sort by published_parsed desc
+        items = sorted(items, key=lambda x: x['published_parsed'], reverse=True)
         return items
     except:
         return []
