@@ -2,8 +2,11 @@ name: Generator
 
 on:
   issues:
+  workflow_dispatch:
   watch:
     types: [started]
+  schedule:
+    - cron: '0 */1 * * *'
 
 concurrency:
   group: generator-${{ github.ref }}
