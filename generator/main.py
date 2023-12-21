@@ -170,7 +170,8 @@ def generate_json_based_on_issues():
 def get_feed_content(rss_url):
     # get all feed content
     try:
-        feed = feedparser.parse(rss_url)
+        feed = feedparser.parse(
+            rss_url, agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0")
         # print(feed)
         # delete content in feed
         items = []
