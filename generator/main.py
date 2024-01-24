@@ -167,7 +167,7 @@ def generate_json_based_on_issues():
 
     return output_dict
 
-def get_feed_content(rss_url):
+def get_feed_content(rss_url, num=10):
     # get all feed content
     try:
         feed = feedparser.parse(
@@ -186,6 +186,9 @@ def get_feed_content(rss_url):
             })
         # sort by published_parsed desc
         items = sorted(items, key=lambda x: x['published_parsed'], reverse=True)
+        # return at most num items
+        if len(items) > num:
+            items = items[:num]
         return items
     except:
         return []
