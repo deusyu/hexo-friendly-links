@@ -1,6 +1,6 @@
 # 要抓取的 issues 配置
 issues:
-  repo: Doradx/hexo-friendly-links # 仓库持有者/仓库名
+  repo: deusyu/hexo-friendly-links # 仓库持有者/仓库名
   groups: [
     {
       name: 'friendly_links_active', # 对应生成的json文件名称
