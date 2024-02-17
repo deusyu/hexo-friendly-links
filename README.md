@@ -66,3 +66,13 @@ issues:
     "description": "Beauty will save the world."
 }
 ```
+
+## 定时同步生成的json至私有仓库的静态博客
+yaml路径：.github/workflows/sync_json.yml
+1. 定义好几个Github Actions secrets  
+- GH_PAT: checkout私有仓库需要的token
+- PRIVATE_PATH: 私有静态博客的JSON目录, 比如``
+- PRIVATE_REPO: 私有仓库的名称，比如`deusyu/hexo-blog`
+- USER_EMAIL: 自己的邮箱地址，比如`daniel@deusyu.app`
+- USER_NAME: 自己的用户名，比如`deusyu`
+2. 手动调试
