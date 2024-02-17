@@ -1,0 +1,49 @@
+name: Sync JSON Files to Private Repository
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 每天凌晨执行
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout public repository (output branch)
+        uses: actions/checkout@v2
+        with:
+          ref: output  # 指定为output分支
+          path: 'public-repo'
+
+      - name: Setup Git
+        run: |
+          git config --global user.name 'deusyu'
+          git config --global user.email ${{ secrets.USER_EMAIL }}
+
+      - name: Clone private repository
+        run: |
+          git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@${{ secrets.PRIVATE_REPO }} private-repo
+
+      - name: Check if JSON file has changed
+        id: file-check
+        run: |
+          if ! cmp -s public-repo/json/all.json private-repo/${{ secrets.PRIVATE_PATH }}/friendly.json; then
+              echo "File has changed, need to sync."
+              echo "::set-output name=sync_needed::true"
+          else
+              echo "File has not changed, no sync needed."
+              echo "::set-output name=sync_needed::false"
+          fi
+
+      - name: Copy JSON files to private repository
+        if: steps.file-check.outputs.sync_needed == 'true'
+        run: |
+          cp public-repo/json/all.json private-repo/${{ secrets.PRIVATE_PATH }}/friendly.json
+
+      - name: Commit and Push changes to private repository
+        if: steps.file-check.outputs.sync_needed == 'true'
+        run: |
+          cd private-repo
+          git add .
+          git commit -m "Update JSON files"
+          git push
