@@ -240,7 +240,7 @@ for key in output_dict.keys():
                 "content": output_dict[key],
             },
             file,
-            ensure_ascii=False
+            ensure_ascii=False,
             indent=4
         )
     print("generate file:", key + ".json")
