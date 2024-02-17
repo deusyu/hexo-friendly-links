@@ -42,5 +42,6 @@ jobs:
         run: |
           cd private-repo
           git add .
-          git commit -m "Update JSON files"
+          git diff-index --quiet HEAD || git commit -m "Update friendly.json on $(date +'%Y-%m-%d')"
           git push
+
