@@ -13,19 +13,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: output  # 指定为output分支
-          path: 'public-repo'
-
-      - name: Setup Git
-        run: |
-          git config --global user.name ${{ secrets.USER_NAME }}
-          git config --global user.email ${{ secrets.USER_EMAIL }}
-
-      - name: Print private repository URL
-        run: |
-          echo "Cloning repository at ${PRIVATE_REPO}"
-      - name: Clone private repository
-        run: |
-          git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@${{ secrets.PRIVATE_REPO }} private-repo
+          path: public-repo
+      - name: Checkout private repository (main branch)
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ secrets.PRIVATE_REPO }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: private-repo
 
       - name: Check if JSON file has changed
         id: file-check
