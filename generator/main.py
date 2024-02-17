@@ -241,6 +241,7 @@ for key in output_dict.keys():
             },
             file,
             ensure_ascii=False
+            indent=4
         )
     print("generate file:", key + ".json")
 print("done")
