@@ -20,6 +20,9 @@ jobs:
           git config --global user.name ${{ secrets.USER_NAME }}
           git config --global user.email ${{ secrets.USER_EMAIL }}
 
+      - name: Print private repository URL
+        run: |
+          echo "Cloning repository at ${PRIVATE_REPO}"
       - name: Clone private repository
         run: |
           git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@${{ secrets.PRIVATE_REPO }} private-repo
