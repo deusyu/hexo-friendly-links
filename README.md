@@ -43,7 +43,7 @@ issues:
 
 
 ## 申请友链
-前往GitHub提交[issues](https://github.com/Doradx/hexo-friendly-links/issues)即可, [直达链接](https://github.com/Doradx/hexo-friendly-links/issues/new?assignees=&labels=&template=template_friend_new.yaml)
+前往GitHub提交[issues](https://github.com/Doradx/hexo-friendly-links/issues)即可, [直达链接](https://github.com/deusyu/hexo-friendly-links/issues/new?assignees=&labels=&template=template_friend_new.yaml)
 需要准备的内容:
 ```json
 {
@@ -59,10 +59,10 @@ issues:
 信息如下：
 ```json
 {
-    "title": "Dorad",
-    "url": "https://blog.cuger.cn",
-    "avatar": "https://blog.cuger.cn/images/avatar.png",
+    "title": "既往不恋",
+    "url": "https://deusyu.app",
+    "avatar": "https://deusyu.app/img/avatar-2023.png",
     "screenshot": "无",
-    "description": "莫回头、勿相忘"
+    "description": "Beauty will save the world."
 }
 ```
