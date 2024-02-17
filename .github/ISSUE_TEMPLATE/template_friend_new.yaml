@@ -2,7 +2,7 @@ name: 友链模板
 description: 自助友链申请模板
 labels: []
 assignees:
-  - Doradx
+  - deusyu
 body:
   - type: markdown
     attributes:
@@ -11,12 +11,12 @@ body:
         欢迎自助申请本站友链，**星号(*)为必填项**。审核通过后会实时同步到博客！
         > 申请前请先添加本站友链，谢谢！
          本站友链信息如下：
-        - 博客名称：遐说-Dorad
-        - 博客地址：https://blog.cuger.cn
-        - 博客图标：https://blog.cuger.cn/images/avatar.png
-        - 博客描述：❤编程❤摄影，期待走遍万水千山！
-        - 友链地址：https://blog.cuger.cn/link/
-        - 订阅地址：https://blog.cuger.cn/feed/
+        - 博客名称：既往不恋
+        - 博客地址：https://deusyu.app
+        - 博客图标：https://deusyu.app/img/avatar-2023.png
+        - 博客描述：Beauty will save the world.
+        - 友链地址：https://deusyu.app/link/
+        - 订阅地址：https://deusyu.app/atom.xml
   - type: checkboxes
     id: checks
     attributes:
@@ -36,7 +36,7 @@ body:
     attributes:
       label: 博客名称
       description: 请输入您的博客名称。
-      placeholder: "如: 遐说"
+      placeholder: "如: 既往不恋"
     validations:
       required: true
   - type: input
@@ -44,7 +44,7 @@ body:
     attributes:
       label: 博客地址
       description: 请输入您博客的主页地址，包含https。
-      placeholder: "如: https://blog.cuger.cn"
+      placeholder: "如: https://deusyu.app"
     validations:
       required: true
   - type: input
@@ -52,7 +52,7 @@ body:
     attributes:
       label: 博客图标
       description: 请输入您博客的图标地址，包含https，请检查是否能正常访问，且无跨域问题。
-      placeholder: "如: https://blog.cuger.cn/images/avatar.png"
+      placeholder: "如: https://deusyu.app/img/avatar-2023.png"
     validations:
       required: true
   - type: input
@@ -60,7 +60,7 @@ body:
     attributes:
       label: 博客描述
       description: 请输入您博客的描述。
-      placeholder: "如: 爱编程，爱摄影，期待走遍万水千山！"
+      placeholder: "如: Beauty will save the world."
     validations:
       required: true
   - type: input
@@ -76,6 +76,6 @@ body:
     attributes:
       label: 订阅地址
       description: 如果您使用有RSS订阅链接，请在此处填写，方便抓取最新文章
-      placeholder: "如: https://blog.cuger.cn/atom.xml"
+      placeholder: "如: https://deusyu.app/atom.xml"
     validations:
       required: false
