@@ -1,0 +1,411 @@
+{
+    "version": "v2.1",
+    "config": {
+        "issues": {
+            "repo": "deusyu/hexo-friendly-links",
+            "groups": [
+                {
+                    "name": "friendly_links_active",
+                    "state": "all",
+                    "labels": [
+                        "active"
+                    ]
+                },
+                {
+                    "name": "friendly_links_open_checklist",
+                    "state": "open",
+                    "labels": [
+                        "checklist"
+                    ]
+                }
+            ],
+            "sort": "updated-desc",
+            "keep_raw": false
+        }
+    },
+    "label": "all",
+    "content": [
+        {
+            "title": "遐说-Dorad",
+            "url": "https://blog.cuger.cn",
+            "avatar": "https://blog.cuger.cn/images/avatar.png",
+            "description": "❤编程❤摄影，期待走遍万水千山！",
+            "url-friends": "https://blog.cuger.cn/link/",
+            "url-feed": "https://blog.cuger.cn/feed/",
+            "status": "active",
+            "rss": [
+                {
+                    "title": "青海出差",
+                    "link": "https://blog.cuger.cn/p/5771/",
+                    "published": "2024-09-29T10:14:00.000Z",
+                    "published_parsed": [
+                        2024,
+                        9,
+                        29,
+                        10,
+                        14,
+                        0,
+                        6,
+                        273,
+                        0
+                    ],
+                    "author": null,
+                    "summary": "此前心心念念想到青海玩耍，没想到第一次到是因为出差。"
+                },
+                {
+                    "title": "我开盒了我自己",
+                    "link": "https://blog.cuger.cn/p/291f/",
+                    "published": "2024-08-19T13:56:00.000Z",
+                    "published_parsed": [
+                        2024,
+                        8,
+                        19,
+                        13,
+                        56,
+                        0,
+                        0,
+                        232,
+                        0
+                    ],
+                    "author": null,
+                    "summary": "出于好奇，我开盒了我自己，结果让我大跌眼镜。"
+                },
+                {
+                    "title": "hexo-butterfly+artalk无法显示文章PV浏览次数",
+                    "link": "https://blog.cuger.cn/p/f551/",
+                    "published": "2024-07-27T06:54:00.000Z",
+                    "published_parsed": [
+                        2024,
+                        7,
+                        27,
+                        6,
+                        54,
+                        0,
+                        5,
+                        209,
+                        0
+                    ],
+                    "author": null,
+                    "summary": "<h2 id=\"问题\"><a class=\"headerlink\" href=\"https://blog.cuger.cn/atom.xml#问题\" title=\"问题\"></a>问题</h2><p>不知啥时候更新了artalk版本，而后发现文章浏览量统计(PV)不见了。<br />经过一番debug，发现是artalk在更新时修改了默认的css选择器，详见<a"
+                },
+                {
+                    "title": "记某站字体混淆解析方案",
+                    "link": "https://blog.cuger.cn/p/2b98/",
+                    "published": "2024-07-24T10:00:00.000Z",
+                    "published_parsed": [
+                        2024,
+                        7,
+                        24,
+                        10,
+                        0,
+                        0,
+                        2,
+                        206,
+                        0
+                    ],
+                    "author": null,
+                    "summary": "记录一次字体加密/混淆数据解析过程。"
+                },
+                {
+                    "title": "记第一次进藏",
+                    "link": "https://blog.cuger.cn/p/6594/",
+                    "published": "2024-07-08T03:54:00.000Z",
+                    "published_parsed": [
+                        2024,
+                        7,
+                        8,
+                        3,
+                        54,
+                        0,
+                        0,
+                        190,
+                        0
+                    ],
+                    "author": null,
+                    "summary": "第一次到西藏出差，以此为记。"
+                },
+                {
+                    "title": "2024川西大环线",
+                    "link": "https://blog.cuger.cn/p/65cb/",
+                    "published": "2024-06-18T09:51:00.000Z",
+                    "published_parsed": [
+                        2024,
+                        6,
+                        18,
+                        9,
+                        51,
+                        0,
+                        1,
+                        170,
+                        0
+                    ],
+                    "author": null,
+                    "summary": "五月底自驾川西大环线，一路风景美不胜收～"
+                },
+                {
+                    "title": "Python读取NetCDF文件-裁剪&计算",
+                    "link": "https://blog.cuger.cn/p/fbd/",
+                    "published": "2024-05-12T11:55:00.000Z",
+                    "published_parsed": [
+                        2024,
+                        5,
+                        12,
+                        11,
+                        55,
+                        0,
+                        6,
+                        133,
+                        0
+                    ],
+                    "author": null,
+                    "summary": "近期项目又开始倒腾NetCDF文件了，处理全国降雨数据，记录一下代码片段。"
+                },
+                {
+                    "title": "2024武汉东湖樱花园",
+                    "link": "https://blog.cuger.cn/p/5d21/",
+                    "published": "2024-03-21T12:03:00.000Z",
+                    "published_parsed": [
+                        2024,
+                        3,
+                        21,
+                        12,
+                        3,
+                        0,
+                        3,
+                        81,
+                        0
+                    ],
+                    "author": null,
+                    "summary": "东湖樱园樱花盛开，踩着小单车过去闲逛了一圈~"
+                },
+                {
+                    "title": "zotero批量修改条目语言解决”等”和”et al”混排问题",
+                    "link": "https://blog.cuger.cn/p/b7df/",
+                    "published": "2024-03-08T02:35:00.000Z",
+                    "published_parsed": [
+                        2024,
+                        3,
+                        8,
+                        2,
+                        35,
+                        0,
+                        4,
+                        68,
+                        0
+                    ],
+                    "author": null,
+                    "summary": "在使用 Zotero 进行参考文献管理时，当采用 GB/T-7714 标准进行中英文混排时，可能会遇到“等”和“et al”的问题。本文提供了详细的分步指南，介绍如何通过修改语言设置来解决此问题。该指南包括使用 JavaScript 代码的具体步骤，以及运行截图以帮助用户可视化该过程。"
+                },
+                {
+                    "title": "torch_geometric_temporal安装报错找不到to_dense_adj",
+                    "link": "https://blog.cuger.cn/p/b1a8/",
+                    "published": "2024-02-25T12:57:00.000Z",
+                    "published_parsed": [
+                        2024,
+                        2,
+                        25,
+                        12,
+                        57,
+                        0,
+                        6,
+                        56,
+                        0
+                    ],
+                    "author": null,
+                    "summary": "如何安装PyTorch Geometric Temporal，以及解决安装过程中遇到的版本报错问题。"
+                }
+            ]
+        },
+        {
+            "title": "土豆不好吃",
+            "url": "https://dmesg.app/",
+            "avatar": "https://dmesg.app/favicon.ico",
+            "description": "Remeber me.",
+            "url-friends": "https://dmesg.app/friends",
+            "url-feed": "https://dmesg.app/feed",
+            "status": "active",
+            "rss": [
+                {
+                    "title": "用 Azure Container Apps 运行PHP网站",
+                    "link": "https://dmesg.app/aca-php.html",
+                    "published": "Sat, 12 Oct 2024 07:10:27 +0000",
+                    "published_parsed": [
+                        2024,
+                        10,
+                        12,
+                        7,
+                        10,
+                        27,
+                        5,
+                        286,
+                        0
+                    ],
+                    "author": "Benny小土豆",
+                    "summary": "既然是容器，那么也可以跑数据库的吧？那只要再加上一个PHP，就可以跑 WordPress、Typecho之类的 [&#8230;]"
+                },
+                {
+                    "title": "Azure Container Apps 连接到虚拟机并配置CPU自动缩放",
+                    "link": "https://dmesg.app/aca-vm-scale.html",
+                    "published": "Sun, 06 Oct 2024 07:24:51 +0000",
+                    "published_parsed": [
+                        2024,
+                        10,
+                        6,
+                        7,
+                        24,
+                        51,
+                        6,
+                        280,
+                        0
+                    ],
+                    "author": "Benny小土豆",
+                    "summary": "我的所有的代码最终都做成了 Docker image，因此可以非常方便的拿出来部署，自然也可以部署在各种 ma [&#8230;]"
+                },
+                {
+                    "title": "使用 Cloudflare Worker获取图片元数据",
+                    "link": "https://dmesg.app/worker-image-metadata.html",
+                    "published": "Sat, 28 Sep 2024 09:56:24 +0000",
+                    "published_parsed": [
+                        2024,
+                        9,
+                        28,
+                        9,
+                        56,
+                        24,
+                        5,
+                        272,
+                        0
+                    ],
+                    "author": "Benny小土豆",
+                    "summary": "这篇文章在 2024年10月05日23:31:04 更新了哦~WebP Cloud 提供一个接口，可以用于获取 [&#8230;]"
+                },
+                {
+                    "title": "将 Cloudflare Workers 迁移到 Azure Function",
+                    "link": "https://dmesg.app/workers-function.html",
+                    "published": "Fri, 27 Sep 2024 06:18:33 +0000",
+                    "published_parsed": [
+                        2024,
+                        9,
+                        27,
+                        6,
+                        18,
+                        33,
+                        4,
+                        271,
+                        0
+                    ],
+                    "author": "Benny小土豆",
+                    "summary": "WebP Cloud Services使用 Cloudflare Workers进行回源来保证原站服务器IP不 [&#8230;]"
+                },
+                {
+                    "title": "one-api/new-api性能优化：使用 ClickHouse 作为日志系统",
+                    "link": "https://dmesg.app/one-api-clickhouse.html",
+                    "published": "Sat, 21 Sep 2024 12:36:32 +0000",
+                    "published_parsed": [
+                        2024,
+                        9,
+                        21,
+                        12,
+                        36,
+                        32,
+                        5,
+                        265,
+                        0
+                    ],
+                    "author": "Benny小土豆",
+                    "summary": "one-api/new-api是一款开源的OpenAI 接口管理 &#38; 分发系统，支持OpenAI、An [&#8230;]"
+                },
+                {
+                    "title": "Stripe 如何安全收款并避免盗刷与测卡",
+                    "link": "https://dmesg.app/stripe-fraud.html",
+                    "published": "Sat, 03 Aug 2024 08:33:38 +0000",
+                    "published_parsed": [
+                        2024,
+                        8,
+                        3,
+                        8,
+                        33,
+                        38,
+                        5,
+                        216,
+                        0
+                    ],
+                    "author": "Benny小土豆",
+                    "summary": "使用Stripe进行收款是一件非常简单的事情，用起来非常舒适，不想写代码就无代码，会写代码还想自己设计前后端可 [&#8230;]"
+                },
+                {
+                    "title": "隐藏于 Cloudflare 的全球网络之中",
+                    "link": "https://dmesg.app/hide-in-cf.html",
+                    "published": "Sat, 27 Jul 2024 14:51:15 +0000",
+                    "published_parsed": [
+                        2024,
+                        7,
+                        27,
+                        14,
+                        51,
+                        15,
+                        5,
+                        209,
+                        0
+                    ],
+                    "author": "Benny小土豆",
+                    "summary": "做一个网站是很简单的事情。买一个域名，买一个服务器，A记录解析过去就好了。 这样做其实有一个非常大的安全隐患， [&#8230;]"
+                },
+                {
+                    "title": "救命！我的 Azure Front Door WAF 规则不生效怎么办！",
+                    "link": "https://dmesg.app/azure-waf.html",
+                    "published": "Wed, 17 Jul 2024 05:41:42 +0000",
+                    "published_parsed": [
+                        2024,
+                        7,
+                        17,
+                        5,
+                        41,
+                        42,
+                        2,
+                        199,
+                        0
+                    ],
+                    "author": "Benny小土豆",
+                    "summary": "这篇文章在 2024年09月27日21:17:41 更新了哦~最近在用 Front Door加速网站访问，想添 [&#8230;]"
+                },
+                {
+                    "title": "使用Azure Front Door 和 Load Balancer",
+                    "link": "https://dmesg.app/azure-fd.html",
+                    "published": "Tue, 16 Jul 2024 06:07:15 +0000",
+                    "published_parsed": [
+                        2024,
+                        7,
+                        16,
+                        6,
+                        7,
+                        15,
+                        1,
+                        198,
+                        0
+                    ],
+                    "author": "Benny小土豆",
+                    "summary": "这篇文章在 2024年09月27日21:17:48 更新了哦~一般来说，做个网站，并开放给全世界，有以下几种方 [&#8230;]"
+                },
+                {
+                    "title": "警惕USDT-TRC20 数字货币诈骗",
+                    "link": "https://dmesg.app/usdt-trc20-scam.html",
+                    "published": "Tue, 30 Apr 2024 06:21:39 +0000",
+                    "published_parsed": [
+                        2024,
+                        4,
+                        30,
+                        6,
+                        21,
+                        39,
+                        1,
+                        121,
+                        0
+                    ],
+                    "author": "Benny小土豆",
+                    "summary": "最近看到一种很有趣的数字货币诈骗方法，有人有意无意在群里、论坛或者其他公开的地方，泄漏自己的助记词，往往是Tr [&#8230;]"
+                }
+            ]
+        }
+    ]
+}
