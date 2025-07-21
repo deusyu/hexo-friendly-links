@@ -36,11 +36,15 @@ class JsonParser:
                 return None
             
             # Parse the first JSON block found
-            json_data = json.loads(json_matches[0].strip())
+            json_str = json_matches[0].strip()
+            if not json_str:
+                logger.warning(f"Empty JSON block in issue #{issue_data.get('number')}")
+                return None
+                
+            json_data = json.loads(json_str)
             
             # Add the raw issue data
-            result = dict(json_data)
-            result["raw"] = issue_data
+            result = dict(json_data, **{"raw": issue_data})
             
             logger.debug(f"Successfully parsed JSON from issue #{issue_data.get('number')}")
             return result

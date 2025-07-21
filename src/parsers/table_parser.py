@@ -66,7 +66,7 @@ class TableParser:
                 result[eng_key] = "" if value == "_No response_" else value
             
             # Add the raw issue data
-            result["raw"] = issue_data
+            result = dict(result, **{"raw": issue_data})
             
             logger.debug(f"Successfully parsed table from issue #{issue_data.get('number')}")
             return result
