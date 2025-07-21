@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Dict, Any, List
 
 from .utils import setup_logger, load_config
-from .services import GitHubService, LinkChecker, RSSService
+from .services import GitHubService, LinkChecker, RSSService, AvatarOptimizer
 from .parsers import JsonParser, TableParser
 
 # Version from package
@@ -32,6 +32,7 @@ class FriendlyLinksGenerator:
         self.github_service = GitHubService()
         self.link_checker = LinkChecker()
         self.rss_service = RSSService()
+        self.avatar_optimizer = AvatarOptimizer()
         
         # Initialize parsers
         self.parsers = [JsonParser, TableParser]
@@ -81,7 +82,7 @@ class FriendlyLinksGenerator:
             parsed_issue = self.parse_issue(issue)
             parsed_issues.append(parsed_issue)
         
-        # Check link status and get RSS content for all parsed issues
+        # Check link status, get RSS content, and optimize avatars for all parsed issues
         for issue in parsed_issues:
             # Check link status if URL exists (matching original logic)
             if "url" in issue and issue["url"]:
@@ -96,6 +97,10 @@ class FriendlyLinksGenerator:
             # Get RSS content if feed URL exists  
             if "url-feed" in issue and issue["url-feed"]:
                 issue["rss"] = self.rss_service.get_feed_content(issue["url-feed"])
+            
+            # Optimize avatar for better frontend loading
+            if "avatar" in issue:
+                issue = self.avatar_optimizer.optimize_avatar(issue)
         
         logger.info(f"Processed {len(parsed_issues)} issues")
         

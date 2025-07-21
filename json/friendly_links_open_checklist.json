@@ -1,0 +1,28 @@
+{
+    "version": "v2.2",
+    "config": {
+        "issues": {
+            "repo": "deusyu/hexo-friendly-links",
+            "groups": [
+                {
+                    "name": "friendly_links_active",
+                    "state": "all",
+                    "labels": [
+                        "active"
+                    ]
+                },
+                {
+                    "name": "friendly_links_open_checklist",
+                    "state": "open",
+                    "labels": [
+                        "checklist"
+                    ]
+                }
+            ],
+            "sort": "updated-desc",
+            "keep_raw": false
+        }
+    },
+    "label": "friendly_links_open_checklist",
+    "content": []
+}
