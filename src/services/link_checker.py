@@ -32,7 +32,7 @@ class LinkChecker:
             Status of the link: "active", "404", or "error"
         """
         if not url or not url.strip():
-            return "error"
+            return "404"
         
         try:
             response = requests.head(

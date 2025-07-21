@@ -51,11 +51,12 @@ class RSSService:
                 items.append(item)
             
             # Sort by published date (newest first)
-            items = sorted(
-                items,
-                key=lambda x: x["published_parsed"] or (1970, 1, 1, 0, 0, 0, 0, 0, 0),
-                reverse=True
-            )
+            # Filter out items with None published_parsed first
+            items_with_date = [item for item in items if item["published_parsed"]]
+            items_without_date = [item for item in items if not item["published_parsed"]]
+            
+            items_with_date = sorted(items_with_date, key=lambda x: x["published_parsed"], reverse=True)
+            items = items_with_date + items_without_date
             
             # Limit the number of items
             if len(items) > max_items:

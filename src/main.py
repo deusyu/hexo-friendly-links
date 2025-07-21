@@ -79,16 +79,23 @@ class FriendlyLinksGenerator:
         parsed_issues = []
         for issue in all_issues:
             parsed_issue = self.parse_issue(issue)
-            
-            # Check link status if URL exists
-            if "url" in parsed_issue and parsed_issue["url"]:
-                parsed_issue["status"] = self.link_checker.check_link(parsed_issue["url"])
-            
-            # Get RSS content if feed URL exists
-            if "url-feed" in parsed_issue and parsed_issue["url-feed"]:
-                parsed_issue["rss"] = self.rss_service.get_feed_content(parsed_issue["url-feed"])
-            
             parsed_issues.append(parsed_issue)
+        
+        # Check link status and get RSS content for all parsed issues
+        for issue in parsed_issues:
+            # Check link status if URL exists (matching original logic)
+            if "url" in issue and issue["url"]:
+                try:
+                    # Use requests.head directly like original code for consistency
+                    import requests
+                    requests.head(issue["url"], timeout=5)
+                    issue["status"] = "active"
+                except:
+                    issue["status"] = "404"
+            
+            # Get RSS content if feed URL exists  
+            if "url-feed" in issue and issue["url-feed"]:
+                issue["rss"] = self.rss_service.get_feed_content(issue["url-feed"])
         
         logger.info(f"Processed {len(parsed_issues)} issues")
         
@@ -101,9 +108,9 @@ class FriendlyLinksGenerator:
             output[group_config.name] = filtered_issues
             logger.info(f"Group '{group_config.name}': {len(filtered_issues)} issues")
         
-        # Remove raw data if configured
+        # Remove raw data if configured (after all grouping is done)
         if not self.config.issues.keep_raw:
-            self._remove_raw_data(output)
+            self._remove_raw_data(parsed_issues)
         
         return output
     
@@ -130,11 +137,10 @@ class FriendlyLinksGenerator:
         
         return filtered
     
-    def _remove_raw_data(self, output: Dict[str, List[Dict[str, Any]]]) -> None:
+    def _remove_raw_data(self, issues: List[Dict[str, Any]]) -> None:
         """Remove raw GitHub data from all issues."""
-        for group_issues in output.values():
-            for issue in group_issues:
-                issue.pop("raw", None)
+        for issue in issues:
+            issue.pop("raw", None)
     
     def save_results(self, output: Dict[str, List[Dict[str, Any]]], output_dir: str = "json") -> None:
         """
@@ -153,7 +159,7 @@ class FriendlyLinksGenerator:
             # Create output structure with metadata
             file_content = {
                 "version": __version__,
-                "config": self.config.dict(),
+                "config": self.config.model_dump(),
                 "label": group_name,
                 "content": issues,
             }
