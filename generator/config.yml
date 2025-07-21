@@ -1,0 +1,12 @@
+# 测试用的简化配置
+issues:
+  repo: deusyu/hexo-friendly-links  # 使用你现有的repo
+  groups:
+    - name: 'test_active'
+      state: all
+      labels: ['active']
+    - name: 'test_open'
+      state: open
+      labels: []
+  sort: updated-desc
+  keep_raw: false 
