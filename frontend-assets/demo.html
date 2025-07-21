@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>友链头像优化 - 使用示例</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        
+        .demo-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        h1, h2 {
+            color: #1e293b;
+        }
+        
+        .friend-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+        
+        .friend-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .friend-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            margin-right: 12px;
+            object-fit: cover;
+        }
+        
+        .friend-info h4 {
+            margin: 0 0 4px 0;
+            color: #1e293b;
+            font-size: 14px;
+        }
+        
+        .friend-info p {
+            margin: 0;
+            color: #64748b;
+            font-size: 12px;
+        }
+        
+        .reader-wall {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        
+        .reader-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        button {
+            padding: 8px 16px;
+            border: 1px solid #d1d5db;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        button:hover {
+            background: #f9fafb;
+        }
+        
+        .info-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .info-box h3 {
+            margin: 0 0 8px 0;
+            color: #1e40af;
+        }
+        
+        .status {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            margin-top: 16px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔗 友链头像优化 - 使用示例</h1>
+    
+    <div class="info-box">
+        <h3>优化效果演示</h3>
+        <p>这个页面演示了头像优化器的效果。注意观察头像的加载过程：加载动画 → 实际头像显示。</p>
+    </div>
+    
+    <!-- 友链列表示例 -->
+    <div class="demo-section">
+        <h2>📖 友链列表</h2>
+        <div class="controls">
+            <button onclick="reloadAvatars()">重新加载头像</button>
+            <button onclick="toggleLazyLoad()">切换懒加载</button>
+            <button onclick="addTestFriend()">添加测试友链</button>
+        </div>
+        
+        <div class="friend-links" id="friendLinks">
+            <!-- 这些数据模拟从你的 friendly.json 加载 -->
+            <div class="friend-item" data-friend='{"avatar_fallbacks":["https://ui-avatars.com/api/?name=Dorad&background=6366f1&color=fff&size=128"]}'>
+                <img class="friend-avatar" data-src="https://blog.cuger.cn/images/avatar.png" alt="遐说-Dorad">
+                <div class="friend-info">
+                    <h4>遐说-Dorad</h4>
+                    <p>❤编程❤摄影，期待走遍万水千山！</p>
+                </div>
+            </div>
+            
+            <div class="friend-item" data-friend='{"avatar_fallbacks":["https://ui-avatars.com/api/?name=土豆&background=f59e0b&color=fff&size=128"]}'>
+                <img class="friend-avatar" data-src="https://dmesg.app/favicon.ico" alt="土豆不好吃">
+                <div class="friend-info">
+                    <h4>土豆不好吃</h4>
+                    <p>Remeber me.</p>
+                </div>
+            </div>
+            
+            <!-- 故意使用失效的头像来测试备用头像功能 -->
+            <div class="friend-item" data-friend='{"avatar_fallbacks":["https://ui-avatars.com/api/?name=测试&background=ec4899&color=fff&size=128", "https://api.dicebear.com/7.x/avataaars/svg?seed=test"]}'>
+                <img class="friend-avatar" data-src="https://example.com/nonexistent-avatar.jpg" alt="测试用户">
+                <div class="friend-info">
+                    <h4>测试用户</h4>
+                    <p>这个头像会失败，展示备用头像功能</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 读者墙示例 -->
+    <div class="demo-section">
+        <h2>👥 读者墙</h2>
+        <div class="reader-wall" id="readerWall">
+            <img class="reader-avatar" data-src="https://blog.cuger.cn/images/avatar.png" alt="读者1">
+            <img class="reader-avatar" data-src="https://dmesg.app/favicon.ico" alt="读者2">
+            <img class="reader-avatar" data-src="https://example.com/fail1.jpg" alt="读者3">
+            <img class="reader-avatar" data-src="https://example.com/fail2.jpg" alt="读者4">
+            <img class="reader-avatar" data-src="https://example.com/fail3.jpg" alt="读者5">
+            <img class="reader-avatar" data-src="https://example.com/fail4.jpg" alt="读者6">
+        </div>
+    </div>
+    
+    <!-- 状态信息 -->
+    <div class="demo-section">
+        <h2>📊 运行状态</h2>
+        <div id="status" class="status">正在初始化优化器...</div>
+    </div>
+
+    <!-- 引入优化器 -->
+    <script src="friendly-links-optimizer.js"></script>
+    
+    <script>
+        // 添加日志记录
+        const originalConsoleLog = console.log;
+        const originalConsoleWarn = console.warn;
+        const statusDiv = document.getElementById('status');
+        
+        function addLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}\n`;
+            statusDiv.textContent += logEntry;
+            statusDiv.scrollTop = statusDiv.scrollHeight;
+        }
+        
+        console.log = function(...args) {
+            addLog(args.join(' '), 'info');
+            originalConsoleLog.apply(console, args);
+        };
+        
+        console.warn = function(...args) {
+            addLog(args.join(' '), 'warn');
+            originalConsoleWarn.apply(console, args);
+        };
+        
+        // 演示功能
+        let currentOptimizer = null;
+        let lazyLoadEnabled = true;
+        
+        function reloadAvatars() {
+            addLog('重新加载所有头像...');
+            
+            // 销毁现有优化器
+            if (currentOptimizer) {
+                currentOptimizer.destroy();
+            }
+            
+            // 重置所有头像
+            document.querySelectorAll('.friend-avatar, .reader-avatar').forEach(img => {
+                img.classList.remove('avatar-loading', 'avatar-loaded', 'avatar-error');
+                img.src = '';
+            });
+            
+            // 重新初始化
+            setTimeout(() => {
+                currentOptimizer = window.initFriendlyLinksOptimizer({
+                    lazyLoad: lazyLoadEnabled,
+                    batchDelay: 300
+                });
+            }, 100);
+        }
+        
+        function toggleLazyLoad() {
+            lazyLoadEnabled = !lazyLoadEnabled;
+            addLog(`懒加载已${lazyLoadEnabled ? '启用' : '禁用'}`);
+            reloadAvatars();
+        }
+        
+        function addTestFriend() {
+            const friendsContainer = document.getElementById('friendLinks');
+            const randomNames = ['Alice', 'Bob', 'Charlie', 'Diana', 'Eve'];
+            const randomName = randomNames[Math.floor(Math.random() * randomNames.length)];
+            
+            const newFriend = document.createElement('div');
+            newFriend.className = 'friend-item';
+            newFriend.innerHTML = `
+                <img class="friend-avatar" data-src="https://ui-avatars.com/api/?name=${randomName}&background=random" alt="${randomName}">
+                <div class="friend-info">
+                    <h4>${randomName}</h4>
+                    <p>动态添加的测试用户</p>
+                </div>
+            `;
+            
+            friendsContainer.appendChild(newFriend);
+            addLog(`添加了新的测试用户: ${randomName}`);
+            
+            // 为新添加的头像应用优化
+            if (currentOptimizer) {
+                const newImg = newFriend.querySelector('.friend-avatar');
+                currentOptimizer.loadAvatar(newImg);
+            }
+        }
+        
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            addLog('页面加载完成，开始初始化优化器');
+            
+            // 监听优化器创建
+            setTimeout(() => {
+                currentOptimizer = window.friendLinksOptimizer;
+                if (currentOptimizer) {
+                    addLog('优化器初始化成功！');
+                } else {
+                    addLog('未找到全局优化器实例');
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html> 

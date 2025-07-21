@@ -5,16 +5,18 @@
             "repo": "deusyu/hexo-friendly-links",
             "groups": [
                 {
-                    "name": "test_active",
+                    "name": "friendly_links_active",
                     "state": "all",
                     "labels": [
                         "active"
                     ]
                 },
                 {
-                    "name": "test_open",
+                    "name": "friendly_links_open_checklist",
                     "state": "open",
-                    "labels": []
+                    "labels": [
+                        "checklist"
+                    ]
                 }
             ],
             "sort": "updated-desc",
@@ -212,7 +214,15 @@
                     "author": null,
                     "summary": "此前心心念念想到青海玩耍，没想到第一次到是因为出差。"
                 }
-            ]
+            ],
+            "avatar_status": "success",
+            "avatar_load_time": 82,
+            "avatar_fallbacks": [
+                "https://ui-avatars.com/api/?name=遐说-Dorad&background=6366f1&color=fff&size=128",
+                "https://api.dicebear.com/7.x/avataaars/svg?seed=遐说-Dorad",
+                "https://gravatar.com/avatar/00000000000000000000000000000000?d=retro&s=128"
+            ],
+            "avatar_optimized": true
         },
         {
             "title": "土豆不好吃",
@@ -403,7 +413,15 @@
                     "author": "Benny小土豆",
                     "summary": "使用Stripe进行收款是一件非常简单的事情，用起来非常舒适，不想写代码就无代码，会写代码还想自己设计前后端可 [&#8230;]"
                 }
-            ]
+            ],
+            "avatar_status": "success",
+            "avatar_load_time": 366,
+            "avatar_fallbacks": [
+                "https://ui-avatars.com/api/?name=土豆不好吃&background=6366f1&color=fff&size=128",
+                "https://api.dicebear.com/7.x/avataaars/svg?seed=土豆不好吃",
+                "https://gravatar.com/avatar/00000000000000000000000000000000?d=retro&s=128"
+            ],
+            "avatar_optimized": true
         }
     ]
 }
