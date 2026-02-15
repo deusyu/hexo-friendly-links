@@ -1,5 +1,6 @@
 """GitHub API service for fetching issues and labels."""
 
+import os
 import requests
 from typing import List, Dict, Any, Optional
 import logging
@@ -9,21 +10,27 @@ logger = logging.getLogger(__name__)
 
 class GitHubService:
     """Service for interacting with GitHub API."""
-    
+
     BASE_URL = "https://api.github.com"
-    HEADERS = {
-        "Accept": "application/vnd.github+json",
-        "User-Agent": "hexo-friendly-links/2.2 (Python requests)",
-    }
-    
+
     def __init__(self, timeout: int = 10):
         """
         Initialize GitHub service.
-        
+
         Args:
             timeout: Request timeout in seconds
         """
         self.timeout = timeout
+        self.headers = {
+            "Accept": "application/vnd.github+json",
+            "User-Agent": "hexo-friendly-links/2.2 (Python requests)",
+        }
+        token = os.environ.get("GITHUB_TOKEN")
+        if token:
+            self.headers["Authorization"] = f"token {token}"
+            logger.info("Using authenticated GitHub API requests")
+        else:
+            logger.warning("No GITHUB_TOKEN found, using unauthenticated requests (60 req/hour limit)")
     
     def get_labels(self, repo: str) -> List[Dict[str, Any]]:
         """
@@ -43,7 +50,7 @@ class GitHubService:
         try:
             response = requests.get(
                 url,
-                headers=self.HEADERS,
+                headers=self.headers,
                 timeout=self.timeout
             )
             response.raise_for_status()
@@ -129,7 +136,7 @@ class GitHubService:
             response = requests.get(
                 url,
                 params=params,
-                headers=self.HEADERS,
+                headers=self.headers,
                 timeout=self.timeout
             )
             response.raise_for_status()
