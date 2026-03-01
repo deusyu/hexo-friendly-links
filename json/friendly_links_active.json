@@ -24,5 +24,23 @@
         }
     },
     "label": "friendly_links_active",
-    "content": []
+    "content": [
+        {
+            "title": "Mashiro’s Baumkuchen",
+            "url": "https://mashiro.best",
+            "avatar": "https://mashiro.best/avatar.jpg",
+            "description": "Try to Keep Stoic & Curiosity!",
+            "url-friends": "https://mashiro.best/links/",
+            "url-feed": "",
+            "status": "active",
+            "avatar_status": "success",
+            "avatar_load_time": 81,
+            "avatar_fallbacks": [
+                "https://ui-avatars.com/api/?name=Mashiros+Baumkuchen&background=6366f1&color=fff&size=128",
+                "https://api.dicebear.com/7.x/avataaars/svg?seed=Mashiros+Baumkuchen",
+                "https://gravatar.com/avatar/00000000000000000000000000000000?d=retro&s=128"
+            ],
+            "avatar_optimized": true
+        }
+    ]
 }
