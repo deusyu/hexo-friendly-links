@@ -24,7 +24,7 @@ jobs:
       - name: Setup Git
         run: |
           git config --global user.name ${{ secrets.USER_NAME }}
-          git config --global user.email ${{ secrets.USER_EMAIL }}
+          git config --global user.email "42929363+deusyu@users.noreply.github.com"
 
       - name: Check if JSON file has changed
         id: file-check
