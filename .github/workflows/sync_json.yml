@@ -4,18 +4,22 @@ on:
   schedule:
     - cron: '0 0 * * *'  # 每天凌晨执行
   workflow_dispatch:
+
+permissions:
+  contents: read
+
 jobs:
   sync:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout public repository (output branch)
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: output  # 指定为output分支
           path: public-repo
       - name: Checkout private repository (main branch)
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: ${{ secrets.PRIVATE_REPO }}
           ref: master
@@ -31,10 +35,10 @@ jobs:
         run: |
           if ! cmp -s public-repo/json/all.json private-repo/${{ secrets.PRIVATE_PATH }}/friendly.json; then
               echo "File has changed, need to sync."
-              echo "::set-output name=sync_needed::true"
+              echo "sync_needed=true" >> "$GITHUB_OUTPUT"
           else
               echo "File has not changed, no sync needed."
-              echo "::set-output name=sync_needed::false"
+              echo "sync_needed=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Copy JSON files to private repository
@@ -49,4 +53,3 @@ jobs:
           git add .
           git diff-index --quiet HEAD || git commit -m "Update friendly.json on $(date +'%Y-%m-%d')"
           git push
-

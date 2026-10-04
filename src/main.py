@@ -4,6 +4,7 @@ Main entry point for Hexo Friendly Links Generator.
 
 import json
 import os
+from copy import deepcopy
 from pathlib import Path
 from typing import Dict, Any, List
 
@@ -21,7 +22,7 @@ logger = setup_logger(__name__)
 class FriendlyLinksGenerator:
     """Main generator class for processing friendly links."""
     
-    def __init__(self, config_path: str = "config.yml"):
+    def __init__(self, config_path: str = "config.yml", previous_output_dir: str = None):
         """
         Initialize the generator.
         
@@ -33,9 +34,33 @@ class FriendlyLinksGenerator:
         self.link_checker = LinkChecker()
         self.rss_service = RSSService()
         self.avatar_optimizer = AvatarOptimizer()
+        self._previous_feeds = self._load_previous_feeds(previous_output_dir)
         
         # Initialize parsers
         self.parsers = [JsonParser, TableParser]
+
+    def _load_previous_feeds(self, previous_output_dir):
+        """Seed from checked-in data, then prefer valid last published entries."""
+        previous = {}
+        paths = [Path.cwd() / "json" / "all.json"]
+        if previous_output_dir:
+            paths.append(Path(previous_output_dir) / "all.json")
+        for path in paths:
+            if not path.is_file():
+                continue
+            try:
+                data = json.loads(path.read_text(encoding="utf-8"))
+                if data.get("config", {}).get("issues", {}).get("repo") != self.config.issues.repo:
+                    continue
+                for item in data.get("content", []):
+                    entries = item.get("rss")
+                    if (item.get("url-feed") and isinstance(entries, list) and entries
+                            and all(isinstance(entry, dict) for entry in entries)):
+                        key = (item.get("url", "").strip().rstrip("/"), item["url-feed"].strip())
+                        previous[key] = deepcopy(entries)
+            except (OSError, ValueError, AttributeError, TypeError) as error:
+                logger.warning("Cannot read previous RSS entries from %s: %s", path, error)
+        return previous
     
     def parse_issue(self, issue_data: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -84,19 +109,17 @@ class FriendlyLinksGenerator:
         
         # Check link status, get RSS content, and optimize avatars for all parsed issues
         for issue in parsed_issues:
-            # Check link status if URL exists (matching original logic)
+            # Keep the existing published status vocabulary and review groups.
             if "url" in issue and issue["url"]:
-                try:
-                    # Use requests.head directly like original code for consistency
-                    import requests
-                    requests.head(issue["url"], timeout=5)
-                    issue["status"] = "active"
-                except:
-                    issue["status"] = "404"
+                status = self.link_checker.check_link(issue["url"])
+                issue["status"] = "active" if status == "active" else "404"
             
             # Get RSS content if feed URL exists  
             if "url-feed" in issue and issue["url-feed"]:
-                issue["rss"] = self.rss_service.get_feed_content(issue["url-feed"])
+                key = (issue.get("url", "").strip().rstrip("/"), issue["url-feed"].strip())
+                issue["rss"] = self.rss_service.get_feed_content(
+                    issue["url-feed"], previous_items=self._previous_feeds.get(key)
+                )
             
             # Optimize avatar for better frontend loading
             if "avatar" in issue:
@@ -180,7 +203,7 @@ class FriendlyLinksGenerator:
 def main() -> None:
     """Main entry point."""
     try:
-        generator = FriendlyLinksGenerator()
+        generator = FriendlyLinksGenerator(previous_output_dir=os.environ.get("PREVIOUS_OUTPUT_DIR"))
         output = generator.process_issues()
         generator.save_results(output)
         
@@ -192,4 +215,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main() 
+    main()

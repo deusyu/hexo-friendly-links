@@ -44,6 +44,8 @@ class AvatarOptimizer:
         
         # Test original avatar
         avatar_status = self._test_avatar_url(original_avatar)
+        logger.debug("Avatar probe for %s: status=%s; load_time_ms=%s",
+                     title, avatar_status["status"], avatar_status.get("load_time"))
         
         # Generate fallback avatars
         fallback_avatars = self._generate_fallback_avatars(title)
@@ -51,7 +53,9 @@ class AvatarOptimizer:
         # Add optimization data
         issue_data.update({
             "avatar_status": avatar_status["status"],
-            "avatar_load_time": avatar_status.get("load_time", 0),
+            # Deprecated numeric placeholder for existing consumers. Live
+            # timing is diagnostic data and must not change published JSON.
+            "avatar_load_time": 0,
             "avatar_fallbacks": fallback_avatars,
             "avatar_optimized": True
         })
@@ -137,4 +141,4 @@ class AvatarOptimizer:
         # Convert to data URL
         svg_bytes = svg_content.encode('utf-8')
         b64_svg = base64.b64encode(svg_bytes).decode('utf-8')
-        return f"data:image/svg+xml;base64,{b64_svg}" 
+        return f"data:image/svg+xml;base64,{b64_svg}"

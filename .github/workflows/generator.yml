@@ -12,30 +12,46 @@ concurrency:
   group: generator-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: write
+  issues: read
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
     - name: Checkout
-      uses: actions/checkout@master
-    - name: Set up Python #安装python
-      uses: actions/setup-python@v5
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+    - name: Read previous published JSON for RSS fallback
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
-        python-version: 3.10.18
+        ref: output
+        path: previous-output
+        persist-credentials: false
+    - name: Set up Python #安装python
+      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+      with:
+        python-version: '3.10.20'
     - name: Install requirements #安装requests
       run: |
-        pip install -r requirements.txt
+        python -m pip install -r requirements.txt
+    - name: Run offline regression tests
+      run: python -m unittest discover -s tests -v
     - name: Update links #更新 (使用重构后的代码)
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PREVIOUS_OUTPUT_DIR: previous-output/json
       run: |
         python run.py
     - name: Commit & Push
-      uses: action-x/commit@v2.9
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        push-branch: 'output'
-        force-push: 'true'
-        commit-message: 'Generate Json (Refactored)'
-        name: github-actions[bot]
-        email: github-actions[bot]@noreply.github.com
+      run: |
+        if diff -qr json previous-output/json >/dev/null; then
+          echo "Published JSON is unchanged; nothing to push."
+          exit 0
+        fi
+        git config user.name 'github-actions[bot]'
+        git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+        git add -- json
+        git diff --cached --quiet || git commit -m 'Generate Json (Refactored)'
+        previous_sha=$(git -C previous-output rev-parse HEAD)
+        git push --force-with-lease="refs/heads/output:$previous_sha" origin HEAD:output

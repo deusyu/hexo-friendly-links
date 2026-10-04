@@ -41,12 +41,18 @@ class LinkChecker:
                 allow_redirects=True
             )
             
-            if response.status_code < 400:
-                logger.debug(f"Link {url} is active (status: {response.status_code})")
-                return "active"
-            else:
-                logger.debug(f"Link {url} returned status {response.status_code}")
-                return "404"
+            status_code = response.status_code
+            response.close()
+            # Some servers reject HEAD even though their pages support GET.
+            if status_code in (403, 405, 501):
+                with requests.get(
+                    url.strip(), timeout=self.timeout,
+                    allow_redirects=True, stream=True
+                ) as response:
+                    status_code = response.status_code
+
+            logger.debug("Link %s returned status %s", url, status_code)
+            return "active" if 200 <= status_code < 300 else "404"
                 
         except requests.exceptions.Timeout:
             logger.warning(f"Timeout checking link: {url}")
@@ -59,4 +65,4 @@ class LinkChecker:
             return "error"
         except Exception as e:
             logger.error(f"Unexpected error checking link {url}: {e}")
-            return "error" 
+            return "error"

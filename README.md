@@ -73,6 +73,22 @@ yaml路径：.github/workflows/sync_json.yml
 - GH_PAT: checkout私有仓库需要的token，在Github `Settings -> Developer Settings -> Personal access tokens` 中申请
 - PRIVATE_REPO: 私有仓库的名称，比如`deusyu/hexo-blog`
 - PRIVATE_PATH: 私有静态博客的JSON目录, 比如`source/link`
-- USER_EMAIL: 自己的邮箱地址，比如`daniel@deusyu.app`
+- 提交邮箱使用 GitHub noreply 地址，无需 `USER_EMAIL` secret
 - USER_NAME: 自己的用户名，比如`deusyu`
 2. 手动调试
+
+## 离线验证与数据兼容
+
+安装 `requirements.txt` 后运行 `python test_refactor.py` 或
+`python -m unittest discover -s tests -v`。测试使用模拟 HTTP 和临时 Git 仓库，
+不会发布评论或改动真实 issue。
+
+链接检查跟随重定向，仅成功的 HTTP 响应标记为 `active`；不支持 HEAD 的
+站点回退到 GET。分组仍按现有 issue 状态和标签配置，不自动修改审核标签。
+
+RSS 请求有显式超时。HTTP/解析失败会记录原因，并优先保留 `output` 分支中
+同一站点、同一订阅 URL 的有效条目；首次修复也可从现有 `json/all.json` 初始化。
+缓存条目不表示订阅端点已恢复。有效的空订阅仍返回空列表。
+
+`avatar_load_time` 已弃用，固定为数值 `0` 以保留旧字段类型；实时耗时仅写入
+调试日志。发布 JSON 的结构及 `all`/标签分组规则保持不变。
